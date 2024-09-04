@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using ToDoAppLocal.Models;
-using System.IO;
 
 namespace ToDoAppLocal.Services
 {
@@ -12,7 +11,7 @@ namespace ToDoAppLocal.Services
         {
             if (!File.Exists(_filePath))
             {
-                return new List<TodoItem>(); 
+                return new List<TodoItem>();
             }
 
             var json = File.ReadAllText(_filePath);

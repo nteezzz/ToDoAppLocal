@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ToDoAppLocal.Models;
 using ToDoAppLocal.Services;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ToDoAppLocal.Controllers
 {
@@ -48,6 +47,7 @@ namespace ToDoAppLocal.Controllers
         }
 
         // Update an existing todo
+        [Authorize]
         [HttpPut("{id}")]
         public ActionResult Update(int id, TodoItem updatedItem)
         {
@@ -69,6 +69,7 @@ namespace ToDoAppLocal.Controllers
         }
 
         // Toggle completion status of a todo
+        [Authorize]
         [HttpPatch("{id}/toggleComplete")]
         public ActionResult ToggleComplete(int id)
         {
@@ -85,6 +86,7 @@ namespace ToDoAppLocal.Controllers
         }
 
         // Delete a todo
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
@@ -97,7 +99,7 @@ namespace ToDoAppLocal.Controllers
 
             todos.Remove(todo);
             _todoService.SaveAllTodos(todos);
-            return NoContent();
+            return Ok();
         }
     }
 }
